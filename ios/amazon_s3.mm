@@ -66,6 +66,8 @@ static AmazonS3 * g_Instance;
 
 -(void)cancel
 {
+	transferOperation.putRequest.delegate = nil;
+	[self autorelease];
 	[transferOperation cancel];
 }
 
@@ -85,7 +87,7 @@ static AmazonS3 * g_Instance;
 		uploadCompletion(success);
 
 	request.delegate = nil;
-	[self release];
+	[self autorelease];
 }
 
 -(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
@@ -96,7 +98,7 @@ static AmazonS3 * g_Instance;
 		uploadCompletion(NO);
 
 	request.delegate = nil;
-	[self release];
+	[self autorelease];
 }
 
 -(void)request:(AmazonServiceRequest *)request didFailWithServiceException:(NSException *)exception
@@ -107,7 +109,7 @@ static AmazonS3 * g_Instance;
 		uploadCompletion(NO);
 
 	request.delegate = nil;
-	[self release];
+	[self autorelease];
 }
 
 -(void)request:(AmazonServiceRequest *)request didReceiveData:(NSData *)data
