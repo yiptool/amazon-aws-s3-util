@@ -121,7 +121,7 @@ static AmazonS3 * g_Instance;
 -(void)request:(AmazonServiceRequest *)request didSendData:(long long)written
 	totalBytesWritten:(long long)totalWritten totalBytesExpectedToWrite:(long long)totalBytes
 {
-	bytesWritten = written;
+	bytesWritten = totalWritten;
 	bytesTotal = totalBytes;
 	percentCompleted = float(double(bytesWritten) / double(bytesTotal) * 100.0);
 
