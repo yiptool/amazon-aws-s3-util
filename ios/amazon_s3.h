@@ -44,6 +44,12 @@
 +(AmazonS3 *)sharedInstance;
 +(void)initWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey;
 +(void)initWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey defaultBucket:(NSString *)bucket;
+-(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key completion:(void(^)(BOOL))completion;
+-(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key bucket:(NSString *)bucket
+	completion:(void(^)(BOOL))cb;
++(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key completion:(void(^)(BOOL))completion;
++(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key bucket:(NSString *)bucket
+	completion:(void(^)(BOOL))completion;
 -(AmazonS3Request *)uploadFile:(NSString *)path forKey:(NSString *)key completion:(void(^)(BOOL))completion;
 -(AmazonS3Request *)uploadFile:(NSString *)path forKey:(NSString *)key bucket:(NSString *)bucket
 	completion:(void(^)(BOOL))cb;

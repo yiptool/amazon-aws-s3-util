@@ -183,6 +183,31 @@ static AmazonS3 * g_Instance;
 	g_Instance = [[AmazonS3 alloc] initWithAccessKey:accessKey secretKey:secretKey defaultBucket:bucket];
 }
 
+
+-(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key completion:(void(^)(BOOL))completion
+{
+	return [self uploadData:data forKey:key bucket:defaultBucket completion:completion];
+}
+
+-(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key bucket:(NSString *)bucket
+	completion:(void(^)(BOOL))cb
+{
+	S3PutObjectRequest * request = [[[S3PutObjectRequest alloc] initWithKey:key inBucket:bucket] autorelease];
+	request.data = data;
+	return [[AmazonS3Request alloc] initWithTransferManager:transferManager putRequest:request completion:cb];
+}
+
++(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key completion:(void(^)(BOOL))completion
+{
+	return [[AmazonS3 sharedInstance] uploadData:data forKey:key completion:completion];
+}
+
++(AmazonS3Request *)uploadData:(NSData *)data forKey:(NSString *)key bucket:(NSString *)bucket
+	completion:(void(^)(BOOL))completion
+{
+	return [[AmazonS3 sharedInstance] uploadData:data forKey:key bucket:bucket completion:completion];
+}
+
 -(AmazonS3Request *)uploadFile:(NSString *)path forKey:(NSString *)key completion:(void(^)(BOOL))completion
 {
 	return [self uploadFile:path forKey:key bucket:defaultBucket completion:completion];
