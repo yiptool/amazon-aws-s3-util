@@ -33,7 +33,7 @@ static AmazonS3 * g_Instance;
 @synthesize transferOperation;
 @synthesize bytesWritten;
 @synthesize bytesTotal;
-@synthesize percentCompleted;
+@synthesize progress;
 @synthesize uploadCompletion;
 @synthesize progressCallback;
 
@@ -123,11 +123,9 @@ static AmazonS3 * g_Instance;
 -(void)request:(AmazonServiceRequest *)request didSendData:(long long)written
 	totalBytesWritten:(long long)totalWritten totalBytesExpectedToWrite:(long long)totalBytes
 {
-	bytesWritten = totalWritten;
 	bytesTotal = totalBytes;
-	percentCompleted = float(double(bytesWritten) / double(bytesTotal) * 100.0);
-
-	NSLog(@"Progress for amazon request %@: %.1f%%", request, percentCompleted);
+	bytesWritten = totalWritten;
+	progress = (bytesTotal == 0 ? 0.0f : float(double(bytesWritten) / double(bytesTotal)));
 
 	if (progressCallback)
 		progressCallback(self);

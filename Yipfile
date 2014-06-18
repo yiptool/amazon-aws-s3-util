@@ -24,10 +24,12 @@ import amazon-aws-s3
 
 public_headers
 {
+	ios/amazon_composite_request.h
 	ios/amazon_s3.h
 }
 
 sources:ios
 {
+	ios/amazon_composite_request.m
 	ios/amazon_s3.mm
 }

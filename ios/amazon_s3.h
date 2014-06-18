@@ -29,7 +29,7 @@
 @property (nonatomic, retain, readonly) S3TransferOperation * transferOperation;
 @property (nonatomic, assign, readonly) int64_t bytesWritten;
 @property (nonatomic, assign, readonly) int64_t bytesTotal;
-@property (nonatomic, assign, readonly) float percentCompleted;
+@property (nonatomic, assign, readonly) float progress;
 @property (nonatomic, copy) void (^ progressCallback)(AmazonS3Request *);
 -(id)initWithTransferManager:(S3TransferManager *)manager putRequest:(S3PutObjectRequest *)request
 	completion:(void(^)(BOOL))completion;
