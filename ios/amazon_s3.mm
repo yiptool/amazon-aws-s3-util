@@ -149,6 +149,7 @@ static AmazonS3 * g_Instance;
 	if (self)
 	{
 		transferManager = [S3TransferManager new];
+		transferManager.s3 = self;
 		self.defaultBucket = bucket;
 	}
 	return self;
