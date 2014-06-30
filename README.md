@@ -2,7 +2,7 @@
 Amazon AWS S3 Util
 ==================
 
-This is an Objective-C library with useful classes for interaction with the
+This is a library with useful classes for interaction with the
 Amazon S3 platform.
 
 Compiling this library
